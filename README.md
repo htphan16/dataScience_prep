@@ -1,2 +1,2 @@
-# dataScience_inR
+# dataScience_prep
 Prep for data science research 
