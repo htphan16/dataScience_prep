@@ -17,6 +17,7 @@ We want you to solve this problem from "first principles," using what you learne
 Do not use the re module or other regular expressions in this problem.
 '''
 import string
+import csv
 
 def pigLatin(word):
 	for c in string.punctuation:
@@ -85,10 +86,32 @@ If a given letter does not appear in the text, there should be a key:value pair 
 Use Python to determine which letter has the highest frequency in each text file, and print the result.
 '''
 
+def freq_dict(filename):
+	file = open(filename, 'r')
+	data = file.read()
+	freq_dict = {}
+	for letter in string.ascii_lowercase:
+		freq = data.count(letter)
+		freq_dict[letter] = freq
+	return freq_dict
+	file.close()
+	
+freqEnglish = freq_dict('encryptedA.txt')
+freqWelsh = freq_dict('encryptedB.txt')
 
 
 '''Problem 2(b). Formatting for R.
 Write your dictionaries with frequency counts to .csv files, with one column for the key and one column for the frequency counted.
 '''
+
+def to_csv(filename, original):
+	with open(filename, 'w', newline='') as csvfile:
+		fieldnames = string.ascii_lowercase
+		writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+		writer.writeheader()
+		writer.writerow(original)
+
+to_csv('freqEnglish.csv', freqEnglish)
+to_csv('freqWelsh.csv', freqWelsh)
 
 
